@@ -2,22 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Services\userServiceInterface;
-use App\Repositories\UserRepository;
 
 
 
 use Illuminate\Http\Request;
 
-    /**
-     * @OA\Info(
-     * title="TEST API",
-     * version="1.0.0",
-     * description="TEST API",
-     * )
-     */
 
 
-class ApiController extends Controller
+
+class userController extends Controller
 {
     /**
      * @OA\Get(
@@ -47,7 +40,7 @@ class ApiController extends Controller
     }
 
     // Continue processing the response with $users
-    $response = response()->json(['data' => $users, 'message' => 'Resource retrieved successfully'], 200);
+    $response = response()->json(['users' => $users, 'message' => 'Resource retrieved successfully'], 200);
     return $response;
 
     }

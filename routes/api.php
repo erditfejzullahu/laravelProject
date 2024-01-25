@@ -26,7 +26,7 @@ Route::post('/resource', [userController::class, 'createResource']);
 Route::put('/resource/{id}', [userController::class, 'updateResource']);
 Route::delete('/resource/{id}', [userController::class, 'deleteResource']);
 
-
+//POSTS
 Route::get('/posts', [postsController::class, 'getAllPosts']);
 Route::post('/posts', [postsController::class, 'makePost']);
 Route::post('/posts/{id}', [postsController::class, 'deletePost']);

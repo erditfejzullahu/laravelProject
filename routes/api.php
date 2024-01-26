@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\http\Controllers\postsController;
-
+use App\http\Controllers\loginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +30,6 @@ Route::delete('/resource/{id}', [userController::class, 'deleteResource']);
 Route::get('/posts', [postsController::class, 'getAllPosts']);
 Route::post('/posts', [postsController::class, 'makePost']);
 Route::post('/posts/{id}', [postsController::class, 'deletePost']);
+
+//LOGIN
+Route::post('/login', [loginController::class, 'login']);

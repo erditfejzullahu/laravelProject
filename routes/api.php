@@ -32,4 +32,8 @@ Route::post('/posts', [postsController::class, 'makePost']);
 Route::post('/posts/{id}', [postsController::class, 'deletePost']);
 
 //LOGIN
-Route::post('/login', [loginController::class, 'login']);
+Route::post('/register', [loginController::class, 'register']);
+Route::middleware(['auth'])->group(function () {
+    // Your authenticated routes go here
+    Route::post('/login', [loginController::class, 'login']);
+});

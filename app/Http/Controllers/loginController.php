@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\userLoginInterface;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class loginController extends Controller
 {
@@ -11,13 +15,39 @@ class loginController extends Controller
 
    public function __construct(userLoginInterface $authService){
     $this->authService = $authService;
+    // $this->middleware('jwt.auth', ['only' => ['login']]);
    }
 
    public function login(Request $request){
 
-    $credintials = $request->only('email', 'password');
-
-    return $this->authService->login($credintials);
+    $credentials = $request->only('email', 'password');
+    Log::debug('asdasd' . print_r($credentials, true));
+    return $this->authService->loginUser($credentials);
    }
+
+   public function register(Request $request){
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+        ]);
+
+        $dataToRegister = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ];
+
+        if ($dataToRegister) {
+
+            $this->authService->registerUser($dataToRegister);
+
+            return response()->json([
+                'status' => true,
+                'message' => "user Created",
+            ], 201);
+        }
+    }
 
 }

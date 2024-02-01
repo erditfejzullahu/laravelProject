@@ -3,5 +3,6 @@
 namespace App\Services;
 
 interface userLoginInterface{
-    public function login(array $credintials);
+    public function loginUser(array $credentials);
+    public function registerUser(array $data);
 }
